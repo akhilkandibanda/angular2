@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+       <style>
+           body{
+               
+               margin-top: 50px;
+               margin-left: 100px;
+           }
+       </style>    
+   </head>
+    <body>
+    
+        <div>
+            <input type="button" id="getInfo" value="get Github user info"> 
+            <div id="results">
+            
+            
+            </div>
+        </div>
+        <script>
+            var buttonEl=document.getElementById("getInfo");
+            var resultEl=document.getElementById("results");
+            
+            
+            var xmlHttp;
+            
+            var getAjaxObject=function(){
+                
+                if(!xmlHttp){
+                if(window.ActiveXObject){//if you run this on IE will return true
+                    return new ActiveXObject("Microsoft.XMLHTTP");// provided by dll
+                    }else{
+                        return new XMLHttpRequest();
+                        
+                    }
+                    }
+            }
+             buttonEl.addEventListener("click",function(){
+                xmlHttp=getAjaxObject(); 
+                xmlHttp.open("GET","https://api.github.com/users");// opening connection
+                xmlHttp.setRequestHeader("Content-Type","text/json");// requesting in particular format behalf of browser
+                xmlHttp.send();
+                xmlHttp.onreadystatechange=handleServerResponse;
+                                               /*usually post method works with own database accept post method
+                                                 this method has 2 arguments, 1)typeof http method(GET/POST) , 2) the URL to access*/
+             });
+                 var handleServerResponse=function(){
+                     
+                     if(xmlHttp.readyState==4){ // handling the response only when the ready state is 4 
+                       if(xmlHttp.status==200)
+                       { //status code is 404 resource not available
+                           var userInfo=JSON.parse(xmlHttp.responseText);
+                           var text="<table border=1>";
+                           text+="<thead><th>Id</th><th>Login</th>";
+                           text+="<th>Type</th><th>Site Admin</th></thead>";
+                           var x;
+                           for(x=0;x<userInfo.length;x++){
+                               text+="<tr><td>"+userInfo[x].id+"</td>";
+                               text+="<td>"+userInfo[x].login+"</td>";
+                               text+="<td>"+userInfo[x].type+"</td>";
+                               text+="<td>"+userInfo[x].site_admin+"</td></tr>";
+                           }
+                           text+="</table>";
+                           resultEl.innerHTML=text;
+                           var link=document.getElementsByTagName("a");
+                           for(var x=0, len=link.length;x<len;x++){
+                               link[x].addEventListener("click",function(event){
+                                  e.preventDefault();
+                                   xmlHttp=getAjaxObject();
+                                   xmlHttp.open("GET","https://api.github.com/users/"+this.id+"/followers");
+                                   xmlHttp.setRequestHeader("Content-Type","text/json");
+                                   xmlHttp.send();
+                                   xmlHttp.onreadystatechange=handleServerResponse;
+                               });
+                           }
+                       
+                       }
+                     } 
+                 };
+        
+        </script>
+    
+    </body>
+
+
+
+</html>

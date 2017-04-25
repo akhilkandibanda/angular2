@@ -1,0 +1,76 @@
+<html>
+<body>
+<form id="form1" action="disablelement.html">
+    First Name: <input type="text",name="fname" value="donald"><br>
+    Last Name:<input type="text",name ="lname" value="duck"><br>
+    <input type="button" onclick="myFunction()" value="submit">
+    <input type="button" onclick="myReset()" value="reset">    
+</form>
+    
+    <p id="demo"> </p>
+    <p id="demo1"> </p>
+    <p id="demo2"> </p>
+
+    <button onclick="myValues()"> Count values</button>
+    
+    <select id="dropdownlist">
+    <option> 1.Apple</option>
+    <option> 2.Orange</option>
+    <option> 3.Banana</option>
+    <option> 4.Pineapple</option>   
+    
+    </select>  <br> <br>
+    <input type="button" onclick="fEnable()" value="Enable">
+    <input type="button" onclick="fDisable()" value="Disable">
+    <input type="button" onclick="clickOptions()" value="Selected">
+    <input type="button" onclick="displayOptions()" value="Display all options">
+    <input type="button" onclick="displayOptions()" value="Display all options">
+    <input type="button" onclick="changeText()" value="changeText">
+
+    <script>
+        function changeText(){
+            var x=document.getElementById("dropdownlist");
+            x.options[x.selectedIndex].text="watermelon";
+        }
+        function displayOptions(){
+            var x="";
+            var i;            
+            var obj=document.getElementById("dropdownlist");
+            for(i=0;i<obj.length;i++){
+                x+="options are  "+obj.options[i].text +"<br>";
+            }
+            document.getElementById("demo2").innerHTML=x;
+        }
+        
+        function clickOptions(){
+            var obj=document.getElementById("dropdownlist");
+            document.getElementById("demo1").innerHTML=obj.options[obj.selectedIndex].text;
+        }
+        
+        function fEnable(){
+            document.getElementById("dropdownlist").disabled=true;
+        }
+        function fDisable(){
+            document.getElementById("dropdownlist").disabled=false;
+        }
+    function myFunction(){
+        document.getElementById("form1").submit();
+    }
+        function myReset(){
+            document.getElementById("form1").reset();
+            
+        }
+        function myValues(){
+            var x=document.getElementById("form1");
+            var text="";
+            var i;
+            for(i=0; i<x.length;i++){
+                text += x.elements[i].value + "<br>";
+            }
+            document.getElementById("demo").innerHTML=text;
+        }
+    
+    </script>
+    
+</body>
+</html>

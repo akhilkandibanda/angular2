@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        
+        <p > Shows the document referrnce of the current document <span id="demo"> </span> </p> 
+        <button onclick="myFunction()"> Try it !</button>
+        <button onclick="myreplace()"> Try DOM replace!</button>
+        <button onclick="winOpen()"> Try winOpen!</button>
+        
+        <button onclick="countElementNa()"> How many elements </button>
+        <button onclick="countByTag()"> How many Tags </button>
+
+        
+        <p id="demo"> </p>
+        <p id="demo1"> </p>
+        <p>
+         Cats: <input name="x" type="radio" value="Cats">
+         Dogs: <input name="x" type="radio" value="Dogs">
+        </p>
+        
+        
+        
+        
+        <script>
+            function myFunction(){
+                document.getElementById("demo").innerHTML=document.lastModified;
+            }
+            
+            function myreplace(){
+                document.open("text/html","replace")
+                document.write("<h1> Learning JS HTML Dom is fun !</h1>");
+                document.close();
+            }
+            function winOpen(){
+                var w=window.open();
+                w.document.open();
+                w.document.write("<h1> Learning JS HTML Dom is fun in new window!</h1>");
+                w.document.close();
+            }
+            
+            function countElementNa(){
+                var x=document.getElementsByName("x");
+                document.getElementById("demo").innerHTML=x.length;
+                
+            }
+            function countByTag(){
+                var x=document.getElementsByTagName("button");
+                document.getElementById("demo1").innerHTML=x.length;
+                
+            }
+
+        </script>
+    </body>
+
+</html>

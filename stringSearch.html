@@ -1,0 +1,27 @@
+<html>
+<body>
+    <button onclick=myFunction()> Search String</button>
+    <p id="demo"> </p>
+    <p id="raj"> Replacing microsoft with w3 schools</p>
+    <p id="rep"> Welcome to w3 schools</p>
+    <button onclick=myReplace()> Replace String</button>
+    
+    <script>
+        function myFunction(){
+            var str="Welcome to W3 schools";
+            var y=str.search(/W3 schools/i);
+            document.getElementById("demo").innerHTML=y;
+            
+        }
+        function myReplace(){
+            var str=document.getElementById("rep").innerHTML;
+            var y=str.replace(/w3 schools/i,"microsoft");
+            document.getElementById("rep").innerHTML=y;
+        }
+    
+    
+    </script>
+    
+    </body>
+
+</html>
